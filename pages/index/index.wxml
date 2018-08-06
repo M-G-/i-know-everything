@@ -1,0 +1,32 @@
+<!--index.wxml-->
+<view class="container">
+
+  <view class="top">
+    <progress percent="{{statusProgress[status]}}" active active-mode="forwards" stroke-width="2" />
+    <canvas canvas-id="myCanvas" style="width: {{imgWidth}}px; height: {{imgHeight}}px;" class="myCanvas" />
+  </view>
+
+  <view class="main">
+    <!-- <icon type="info" size="20" bindtap="bindShowDetail"/> -->
+    <!-- <text class="loading" wx:if="{{!!loading}}">{{statusTxt[status]}}</text> -->
+    <!-- 底图 -->
+    <icon wx:if="{{!img && !result && !loading}}" type="search" size="200" color="#f6f6f6" />
+
+    <!-- 物品图 -->
+    <image wx:if="{{!!img}}" src="{{img}}" class="review" mode="widthFix" />
+
+    <!-- 加载中 -->
+    <text class="loading" wx:if="{{!!loading}}">图像识别中...</text>
+
+    <!-- 识别结果 -->
+    <view wx:if="{{!!result}}">
+      <text class="title" bindtap="bindShowDetail">{{name}}</text>
+      <icon type="info" size="20" style="vertical-align: -26rpx; padding-left: 10rpx;" color="#09BB07" bindtap="bindShowDetail" />
+    </view>
+  </view>
+
+  <view class="toolbar">
+    <button bindtap="bindChoose" data-type="common" type="{{type === 'common' ? 'primary' : 'default'}}" class="button">AI识图</button>
+    <button bindtap="bindChoose" data-type="car" type="{{type === 'car' ? 'primary' : 'default'}}" class="button">AI识车</button>
+  </view>
+</view>
